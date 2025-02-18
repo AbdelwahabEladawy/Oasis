@@ -3,6 +3,7 @@ import { formatCurrency } from "../../utils/helpers.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DeleteCabin } from "../../services/apiCabins.js";
 import toast from "react-hot-toast";
+
 // v1
 const TableRow = styled.div`
   display: grid;
