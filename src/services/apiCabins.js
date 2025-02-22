@@ -12,10 +12,13 @@ export async function getCabins(params) {
 }
 
 export async function createCabin(newCabin) {
-  const sanitizedImageName = newCabin.image.name.replaceAll("/", "");
-  const imageName = `${Math.random()}-${sanitizedImageName}`;
-  
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/images/${imageName}`;
+  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+    "/",
+    ""
+  );
+
+
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/images/Cabin-images${imageName}`;
 
   const { data, error } = await supabase
     .from("cabins")
@@ -24,21 +27,19 @@ export async function createCabin(newCabin) {
 
   if (error) {
     console.error(error);
-    throw new Error("cabins could not be loaded ");
+    throw new Error("لم يتم إنشاء الكوخ.");
   }
-
-  const {  error:storageError } = await supabase.storage
+  const { error: storageError } = await supabase.storage
     .from("cabin-images")
-    .upload(imageName, newCabin.image );
+    .upload(imageName, newCabin.image);
 
-
-if(storageError){
-  await supabase.from("cabins").delete().eq("id", data.id);
-  console.error(storageError);
-    throw new Error("cabins img not be uploaded and the cabin could not be created ");
-}
-
-
+  if (storageError) {
+    await supabase.from("cabins").delete().eq("id", data.id);
+    console.error(storageError);
+    throw new Error(
+      "cabins img not be uploaded and the cabin could not be created "
+    );
+  }
 
   return data;
 }
