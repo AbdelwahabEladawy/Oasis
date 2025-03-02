@@ -16,9 +16,10 @@ export async function createCabin(newCabin) {
     "/",
     ""
   );
+  // https://jbrgahnzynistyrhcvpu.supabase.co/storage/v1/object/public/cabin-images/0.5475973480415874_cabin-002.jpg
+  // https://jbrgahnzynistyrhcvpu.supabase.co/storage/v1/object/public/cabin-images/0.839483279132234-cabin-002.jpg
 
-
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/images/Cabin-images${imageName}`;
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
   const { data, error } = await supabase
     .from("cabins")
