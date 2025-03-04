@@ -44,7 +44,7 @@ export async function createCabin(newCabin) {
 
   return data;
 }
-
+// fdsjklhfsjklghsdgjksdgjk
 export async function DeleteCabin(id) {
   const { error, data } = await supabase.from("cabins").delete().eq("id", id);
 
